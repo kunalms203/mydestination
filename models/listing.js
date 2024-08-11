@@ -7,7 +7,7 @@ const listingSchema = new Schema({
     required: true,
   },
   description: String,
-  img: {
+  image: {
     type: String,
     set: (v) =>
       v === ""
