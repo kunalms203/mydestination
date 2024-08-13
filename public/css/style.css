@@ -1,3 +1,7 @@
+body {
+  font-family: "Plus Jakarta Sans", sans-serif !important;
+}
+
 .navbar {
   height: 5rem;
   background-color: white;
@@ -31,20 +35,57 @@
   color: #222222;
 }
 
-
-
-.f-social ,.f-info-tc {
+.f-social,
+.f-info-tc {
   width: 100%;
   text-align: center;
 }
 
-.f-social i{
-    margin-right: 0.25rem;
-    margin-left: 0.25rem;
-    font-size: 1.5rem;
-  }
+.f-social i {
+  margin-right: 0.25rem;
+  margin-left: 0.25rem;
+  font-size: 1.5rem;
+}
 
-  .f-copy{
-    font-weight: 500;
-  }
-  
+.f-copy {
+  font-weight: 500;
+}
+
+.card {
+  border: none !important;
+  margin-bottom: 2rem;
+  min-width: 20rem;
+  max-width: 26rem;
+}
+
+.card-img-top {
+  border-radius: 0.75rem !important;
+  width: 100% !important;
+  height: 20rem !important;
+  object-fit: cover !important;
+}
+
+.card-body {
+  padding: 0 !important;
+}
+
+.card-text {
+  font-weight: 400 !important;
+}
+
+.box{
+  margin-left: 5rem; 
+  margin-right: 5rem;
+}
+
+.listing-a {
+  text-decoration: none;
+}
+.card-img-overlay {
+ opacity: 0;
+}
+
+.card-img-overlay:hover {
+ opacity: 0.1;
+ background-color: white;
+}
