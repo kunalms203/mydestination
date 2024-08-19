@@ -1,8 +1,8 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
 <body>
-  <h3>Create a New listing</h3>
-
+  <h3 class="edit-h3">Create a New listing</h3>
+  <br />
   <form method="POST" action="/Listings">
     <div>
       <label for="Title" class="form-label">Title</label>
@@ -13,6 +13,7 @@
         class="form-control"
       />
     </div>
+    <br />
     <div>
       <label for="Description" class="form-label">Description</label>
       <textarea name="listing[description]" type="text" class="form-control">
@@ -28,24 +29,28 @@
         class="form-control"
       />
     </div>
+    <br />
     <div>
-      <label for="Price" class="form-label">Price</label>
-      <input
-        name="listing[price]"
-        type="number"
-        placeholder="enter price"
-        class="form-control"
-      />
+      <div style="display: inline-block; margin-right: 7.5rem; width: 45%">
+        <label for="Price" class="form-label">Price</label>
+        <input
+          name="listing[price]"
+          type="number"
+          placeholder="enter price"
+          class="form-control"
+        />
+      </div>
+      <div style="display: inline-block; width: 45%">
+        <label for="Location" class="form-label">Location</label>
+        <input
+          name="listing[location]"
+          placeholder="Enter Location"
+          type="text"
+          class="form-control"
+        />
+      </div>
     </div>
-    <div>
-      <label for="Location" class="form-label">Location</label>
-      <input
-        name="listing[location]"
-        placeholder="Enter Location"
-        type="text"
-        class="form-control"
-      />
-    </div>
+    <br />
     <div>
       <label for="Country" class="form-label">Country</label>
       <input
@@ -55,8 +60,9 @@
         class="form-control"
       />
     </div>
-
-   
-    <button type="submit" class="btn btn-dark">Submit</button>
+    <br />
+    <button type="submit" class="btn btn-dark add-btn">ADD</button>
+    <br />
   </form>
+  <br />
 </body>
