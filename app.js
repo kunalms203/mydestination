@@ -5,6 +5,7 @@ const Listing = require("./models/listing.js");
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
+const wrapAsync = require('./utils/wrapAsync.js');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -23,59 +24,69 @@ async function main() {
   }
 }
 
-app.listen(8080, () => {
-  console.log("Server is running on port 8000");
-});
-
 app.get("/", (req, res) => {
-  res.send("you are on the same ports");
+  res.send("you are on the Root ports");
 });
 
+// New Listing Route
 app.get("/Listings/new", (req, res) => {
   res.render("Listings/new.ejs");
 });
 
-app.get("/Listings", async (req, res) => {
+// Index Route
+app.get("/Listings", wrapAsync(async (req, res) => {
   const alllistings = await Listing.find({});
   res.render("Listings/index.ejs", { alllistings });
-});
+}));
 
-app.get("/Listings/:id", async (req, res) => {
+// Listing Detail
+app.get("/Listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
   res.render("Listings/show.ejs", { listing });
-});
+}));
 
-app.post("/Listings", async (req, res) => {
+// Create Route
+app.post("/Listings", wrapAsync(async (req, res) => {
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   console.log(newListing);
   res.redirect("/Listings");
-});
+}));
 
-app.get("/Listings/:id/edit", async (req, res) => {
+// Edit  Route
+app.get("/Listings/:id/edit", wrapAsync(async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
 
   res.render("Listings/edit.ejs", { listing });
-});
+}));
 
-app.put("/Listings/:id", async (req, res) => {
+// Update Route
+app.put("/Listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
   let updatedListing=await Listing.findByIdAndUpdate(id, req.body.listing, {
     new: true,
   });
   console.log(updatedListing);
   res.redirect("/Listings");
-});
+}));
 
-app.delete("/Listings/:id", async (req, res) => {
+// Delete Route 
+app.delete("/Listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
   let deletedListing = await Listing.findByIdAndDelete(id);
   console.log(deletedListing);
   res.redirect("/Listings");
-});
+}));
 
+app.use((err,req,res,next)=>{
+  res.send("Something Went wrong");
+})
+
+app.listen(8080, () => {
+  console.log("Server is running on port 8080");
+});
 // app.get("/testlistings",async (req, res) => {
 //     let sampelListing = new Listing({
 //         title: "My Home Listing",

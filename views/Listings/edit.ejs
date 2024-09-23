@@ -2,7 +2,7 @@
 <body>
   <h3 class="edit-h3">Edit Listing</h3>
   <br />
-  <form method="POST" action="/Listings/<%= listing.id %>?_method=PUT">
+  <form method="POST" action="/Listings/<%= listing.id %>?_method=PUT" novalidate class="needs-validation">
     <div>
       <label for="title" class="form-label">Title</label>
       <input
@@ -10,22 +10,25 @@
         class="form-control"
         value="<%= listing.title%>"
         type="text"
+        required
       />
+      <div class="invalid-feedback">Invalid - Please Enter valid Title !</div>
     </div>
     <br />
     <div>
       <label for="description" class="form-label">Description</label>
-      <textarea name="listing[description]" class="form-control" type="text">
+      <textarea name="listing[description]" class="form-control" type="text" required>
       <%= listing.description %></textarea
       >
+      <div class="invalid-feedback">Invalid - Please Enter valid Description !</div>
     </div>
     <br />
     <div>
-      <label for="image" class="form-label">Image</label>
+      <label for="image.url" class="form-label">Image</label>
       <input
-        name="listing[image]"
+        name="listing[image.url]"
         class="form-control"
-        value="<%= listing.image%>"
+        value="<%= listing.image.url%>"
         type="text"
       />
     </div>
@@ -38,7 +41,9 @@
           class="form-control"
           
           value="<%= listing.price%>"
+          required
         />
+        <div class="invalid-feedback">Invalid - Please Enter valid Price !</div>
       </div>
       <div style="width: 40%; display: inline-block">
         <label for="location" class="form-label">Location</label>
@@ -47,7 +52,9 @@
           class="form-control"
           value="<%= listing.location%>"
           type="text"
+          required
         />
+        <div class="invalid-feedback">Invalid - Please Enter valid Location !</div>
       </div>
     </div>
     <br />
@@ -58,7 +65,9 @@
         class="form-control"
         value="<%= listing.country%>"
         type="text"
+        required
       />
+      <div class="invalid-feedback">Invalid - Please Enter valid Country !</div>
     </div>
     <br />
     <button class="btn btn-dark add-btn" type="submit">Submit</button>

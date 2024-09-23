@@ -1,68 +1,54 @@
 <% layout("/layouts/boilerplate.ejs") %>
 
-<body>
-  <h3 class="edit-h3">Create a New listing</h3>
-  <br />
-  <form method="POST" action="/Listings">
-    <div>
-      <label for="Title" class="form-label">Title</label>
-      <input
-        name="listing[title]"
-        placeholder="enter title"
-        type="text"
-        class="form-control"
-      />
-    </div>
+  <body>
+    <h3 class="edit-h3">Create a New listing</h3>
     <br />
-    <div>
-      <label for="Description" class="form-label">Description</label>
-      <textarea name="listing[description]" type="text" class="form-control">
-  Enter description</textarea
-      >
-    </div>
-    <div>
-      <label for="Image" class="form-label">Image</label>
-      <input
-        name="listing[image]"
-        placeholder="Enter img (URl)"
-        type="text"
-        class="form-control"
-      />
-    </div>
-    <br />
-    <div>
-      <div style="display: inline-block; margin-right: 7.5rem; width: 45%">
-        <label for="Price" class="form-label">Price</label>
-        <input
-          name="listing[price]"
-          type="number"
-          placeholder="enter price"
-          class="form-control"
-        />
+    <form method="POST" action="/Listings" novalidate class="needs-validation">
+      <div>
+        <label for="Title" class="form-label">Title</label>
+        <input name="listing[title]" placeholder="enter title" type="text" class="form-control" required />
+        <div class="valid-feedback">Nice Title looks Good !</div>
+        <div class="invalid-feedback">Plese enter valid Title !</div>
       </div>
-      <div style="display: inline-block; width: 45%">
-        <label for="Location" class="form-label">Location</label>
-        <input
-          name="listing[location]"
-          placeholder="Enter Location"
-          type="text"
-          class="form-control"
-        />
+      <br />
+      <div>
+        <label for="Description" class="form-label">Description</label>
+        <textarea name="listing[description]" type="text" class="form-control" required></textarea>
+        <div class="valid-feedback">Nice Description !</div>
+        <div class="invalid-feedback">Invalid - Please Enter valid Description !</div>
       </div>
-    </div>
+      <div>
+        <label for="Image.url" class="form-label">Image</label>
+        <input name="listing[image.url]" placeholder="Enter img (URl)" type="text" class="form-control" />
+
+      </div>
+      <br />
+      <div>
+        <div style="display: inline-block; margin-right: 7.5rem; width: 45%">
+          <label for="Price" class="form-label">Price</label>
+          <input name="listing[price]" type="number" placeholder="enter price" class="form-control" required />
+          <div class="valid-feedback">Nice!</div>
+          <div class="invalid-feedback">
+            Please fill up the Price!
+          </div>
+        </div>
+        <div style="display: inline-block; width: 45%">
+          <label for="Location" class="form-label">Location</label>
+          <input name="listing[location]" placeholder="Enter Location" type="text" class="form-control" required />
+          <div class="valid-feedback">You Entered correct Location !</div>
+      <div class="invalid-feedback">Please enter Location !</div>
+        </div>
+      </div>
+      <br />
+      <div>
+        <label for="Country" class="form-label">Country</label>
+        <input name="listing[country]" placeholder="Enter country" type="text" class="form-control" required />
+        <div class="valid-feedback">Nice!</div>
+      <div class="invalid-feedback">Please enter Your Country Name!</div>
+      </div>
+      <br />
+      <button type="submit" class="btn btn-dark add-btn">ADD</button>
+      <br />
+    </form>
     <br />
-    <div>
-      <label for="Country" class="form-label">Country</label>
-      <input
-        name="listing[country]"
-        placeholder="Enter country"
-        type="text"
-        class="form-control"
-      />
-    </div>
-    <br />
-    <button type="submit" class="btn btn-dark add-btn">ADD</button>
-    <br />
-  </form>
-  <br />
-</body>
+  </body>
