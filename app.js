@@ -6,13 +6,14 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync.js');
+const ExpressError = require('./utils/ExpressErrors.js');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 app.engine('ejs', ejsMate);
-app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.static(path.join(__dirname, "/public")));
 
 main();
 async function main() {
@@ -48,6 +49,9 @@ app.get("/Listings/:id", wrapAsync(async (req, res) => {
 
 // Create Route
 app.post("/Listings", wrapAsync(async (req, res) => {
+  if(!req.body.listing){
+    throw new ExpressError(400,"Please Entere the valid listing");
+  }
   const newListing = new Listing(req.body.listing);
   await newListing.save();
   console.log(newListing);
@@ -65,7 +69,7 @@ app.get("/Listings/:id/edit", wrapAsync(async (req, res) => {
 // Update Route
 app.put("/Listings/:id", wrapAsync(async (req, res) => {
   let { id } = req.params;
-  let updatedListing=await Listing.findByIdAndUpdate(id, req.body.listing, {
+  let updatedListing = await Listing.findByIdAndUpdate(id, req.body.listing, {
     new: true,
   });
   console.log(updatedListing);
@@ -80,22 +84,28 @@ app.delete("/Listings/:id", wrapAsync(async (req, res) => {
   res.redirect("/Listings");
 }));
 
-app.use((err,req,res,next)=>{
-  res.send("Something Went wrong");
+app.all("*", (req, res, next) => { 
+  next(new ExpressError( 404,"Page Not Found"));
+});
+
+app.use((err, req, res, next) => {
+  let { statusCode=500, message="Something Went wrong" } = err;
+  // res.status(statusCode).send(message);
+  res.render("error.ejs", { message});
 })
 
 app.listen(8080, () => {
   console.log("Server is running on port 8080");
 });
-app.get("/testlistings",async (req, res) => {
-    let sampelListing = new Listing({
-        title: "My Home Listing",
-        description: "This is a sample listing",
-        img:"https://plus.unsplash.com/premium_photo-1682377521753-58d1fd9fa5ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-        price: 100,
-        location: "New York, NY",
-        country:"USA"
-    });
-    await sampelListing.save();
-    res.send("Saved");
-})
+// app.get("/testlistings",async (req, res) => {
+//     let sampelListing = new Listing({
+//         title: "My Home Listing",
+//         description: "This is a sample listing",
+//         img:"https://plus.unsplash.com/premium_photo-1682377521753-58d1fd9fa5ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+//         price: 100,
+//         location: "New York, NY",
+//         country:"USA"
+//     });
+//     await sampelListing.save();
+//     res.send("Saved");
+// })
