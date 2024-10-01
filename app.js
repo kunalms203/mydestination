@@ -7,6 +7,7 @@ const methodOverride = require("method-override");
 const ejsMate = require('ejs-mate');
 const wrapAsync = require('./utils/wrapAsync.js');
 const ExpressError = require('./utils/ExpressErrors.js');
+const Review = require('./models/review.js');
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -84,6 +85,19 @@ app.delete("/Listings/:id", wrapAsync(async (req, res) => {
   res.redirect("/Listings");
 }));
 
+// Review Post Route
+app.post("/Listings/:id/reviews", wrapAsync(async (req, res) => {
+  let listing = await Listing.findById(req.params.id);
+  let newReview = new Review(req.body.review)
+
+  listing.reviews.push(newReview);
+  await newReview.save();
+  await listing.save();
+  
+  console.log("new review Saved");
+  res.redirect(`/Listings/${listing.id}`);
+}));
+
 app.all("*", (req, res, next) => { 
   next(new ExpressError( 404,"Page Not Found"));
 });
@@ -97,15 +111,4 @@ app.use((err, req, res, next) => {
 app.listen(8080, () => {
   console.log("Server is running on port 8080");
 });
-// app.get("/testlistings",async (req, res) => {
-//     let sampelListing = new Listing({
-//         title: "My Home Listing",
-//         description: "This is a sample listing",
-//         img:"https://plus.unsplash.com/premium_photo-1682377521753-58d1fd9fa5ce?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
-//         price: 100,
-//         location: "New York, NY",
-//         country:"USA"
-//     });
-//     await sampelListing.save();
-//     res.send("Saved");
-// })
+

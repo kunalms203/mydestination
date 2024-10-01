@@ -22,6 +22,10 @@ const listingSchema = new Schema({
   price: Number,
   location: String,
   country: String,
+  reviews: [{ 
+    type: Schema.Types.ObjectId ,
+    ref: "Review"  // referencing Review model  // this reference is used to fetch the related review document when listing document is fetched from db.
+  }]
 });
 const Listing = mongoose.model("Listing", listingSchema);
 module.exports = Listing;

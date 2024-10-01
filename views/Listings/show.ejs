@@ -3,7 +3,7 @@
     <body>
         <div class="row mt-3">
             <div class="col-8  offset-3">
-                <h3>Listing Details :</h3>
+                <h3><%= listing.title %></h3>
             </div>
             <div class="show-card col-6  offset-3">
                 <img class="card-img-top show-img" src="<%= listing.image.url %>" alt="Listing Image">
@@ -27,6 +27,21 @@
         <div class="btns pt-3"><a class="btn btn-dark col-1 offset-3 edit-btn" href="/Listings/<%=listing._id%>/edit">EDIT</a>
             <form method="post" action="/Listings/<%=listing.id%>?_method=DELETE">
                 <button class="btn btn-dark offset-5 add-btn">DELETE</button>
+            </form>
+        </div>
+        <hr class="mt-4 mb-4">
+        <div class="col-8  offset-3 mt-4">
+            <h4 class="review-h4 mb-4">leave a Review</h4>
+            <form action="/Listings/<%= listing.id %>/reviews" method="POST">
+                <div class="mb-3">
+                    <label for="rating">Rating</label>
+                    <input type="range" min="1" max="5" id="rating" name="review[rating]" class="form-range">
+                </div>
+                <div class="mb-3">
+                    <label for="comment">Comment</label>
+                    <textarea name="review[comment]" id="comment" col="30" rows="4" class="form-control"></textarea>
+                </div>
+                <button class="btn btn-outline-dark mb-3">SUBMIT</button>
             </form>
         </div>
     </body>
