@@ -58,7 +58,7 @@ body {
   font-weight: 500;
 }
 
-.card {
+.card-listing {
   border: none !important;
   margin-bottom: 2rem;
   min-width: 20rem;
@@ -116,3 +116,4 @@ body {
 .review-h4{
   color: rgb(0, 166, 207) !important;
 }
+
