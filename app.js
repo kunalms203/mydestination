@@ -18,14 +18,14 @@ app.engine('ejs', ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
 main();
-async function main() {
-  try {
-    await mongoose.connect("mongodb://127.0.0.1:27017/mydestination");
-    console.log("Connected to MongoDB");
-  } catch (error) {
-    console.log("Error connecting to MongoDB:", error.message);
-  }
-}
+// async function main() {
+//   try {
+//     await mongoose.connect("mongodb://127.0.0.1:27017/mydestination");
+//     console.log("Connected to MongoDB");
+//   } catch (error) {
+//     console.log("Error connecting to MongoDB:", error.message);
+//   }
+// }
 
 app.get("/", (req, res) => {
   res.send("you are on the Root ports");
