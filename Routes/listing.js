@@ -3,6 +3,7 @@ const router = express.Router();
 const wrapAsync = require('../utils/wrapAsync.js');
 const Listing = require("../models/listing.js");
 const ExpressError = require('../utils/ExpressErrors.js');
+const flash = require('connect-flash');
 
 
 
@@ -30,6 +31,7 @@ router.get("/new", (req, res) => {
     }
     const newListing = new Listing(req.body.listing);
     await newListing.save();
+    req.flash("success","Successfully new listing created");
     console.log(newListing);
     res.redirect("/Listings");
   }));
