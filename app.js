@@ -13,7 +13,7 @@ const User = require("./models/user.js");
 
 const listingRouter = require("./Routes/listing.js");
 const reviewsRouter = require("./Routes/review.js");
-const userRouter = require("./routes/user.js");
+const userRouter = require("./Routes/user.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -61,6 +61,7 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.crrUser = req.user;
   next();
 });
 
