@@ -118,6 +118,10 @@ body {
 }
 
 .show-owner{
-
 color: rgb(0, 195, 255);
+}
+
+.material-symbols-outlined{
+  scale: 0.8  !important;
+  margin-top: 0.25rem !important;
 }
