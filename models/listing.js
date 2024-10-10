@@ -25,7 +25,11 @@ const listingSchema = new Schema({
   reviews: [{
     type: Schema.Types.ObjectId,
     ref: "Review"  // referencing Review model  // this reference is used to fetch the related review document when listing document is fetched from db.
-  }]
+  }],
+  owner : {
+    type: Schema.Types.ObjectId,
+    ref: "User"  // referencing User model  // this reference is used to fetch the related user document when listing document is fetched from db.
+  }
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {
