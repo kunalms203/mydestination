@@ -23,16 +23,14 @@ MyDestination is a web-based platform similar to Airbnb that allows users to fin
 - **Booking System**: Guests can book properties directly through the platform, with options to review and cancel bookings.
 - **Review System**: Guests can leave reviews and ratings for properties they have stayed at.
 - **Responsive Design**: Fully responsive design that works on all devices.
-- **Admin Dashboard**: Admin panel for managing users, properties, and bookings.
 
 ## Tech Stack
 
-- **Frontend**: React.js, Redux.js, Tailwind CSS
+- **Frontend**: javascript , CSS , Bootstrap
 - **Backend**: Node.js, Express.js
-- **Database**: MongoDB, MySQL (optional for different use cases)
-- **Authentication**: JWT (JSON Web Tokens)
+- **Database**: MongoDB
+- **Authentication**: Passport
 - **API**: RESTful API
-- **Hosting**: [Choose your hosting service, e.g., AWS, Heroku]
 
 ## Installation
 
